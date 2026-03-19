@@ -324,10 +324,10 @@ def setup_vercel(env, gh_user, repo_name, proj_url, anon_key):
             "repo": f"{gh_user}/{repo_name}"
         },
         "environmentVariables": [
-            {"key": "NEXT_PUBLIC_SUPABASE_URL",    "value": proj_url, "target": ["production","preview","development"]},
-            {"key": "NEXT_PUBLIC_SUPABASE_ANON_KEY","value": anon_key, "target": ["production","preview","development"]},
-            {"key": "NEXT_PUBLIC_ADMIN_EMAIL",      "value": env["ADMIN_EMAIL"], "target": ["production","preview","development"]},
-            {"key": "NEXT_PUBLIC_SITE_URL",         "value": site_url, "target": ["production","preview","development"]},
+            {"key": "NEXT_PUBLIC_SUPABASE_URL",     "value": proj_url,             "type": "plain",     "target": ["production","preview","development"]},
+            {"key": "NEXT_PUBLIC_SUPABASE_ANON_KEY","value": anon_key,             "type": "encrypted", "target": ["production","preview","development"]},
+            {"key": "NEXT_PUBLIC_ADMIN_EMAIL",      "value": env["ADMIN_EMAIL"],   "type": "plain",     "target": ["production","preview","development"]},
+            {"key": "NEXT_PUBLIC_SITE_URL",         "value": site_url,             "type": "plain",     "target": ["production","preview","development"]},
         ]
     }
 
