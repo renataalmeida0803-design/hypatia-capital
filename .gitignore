@@ -3,6 +3,12 @@ node_modules/
 .env.local
 .env*.local
 setup/.env.setup
+setup/upload_clientes.py
+setup/deploy.py
+setup/deploy_vercel.ps1
+setup/install_vercel.ps1
 *.log
 .DS_Store
 Thumbs.db
+
+.vercel

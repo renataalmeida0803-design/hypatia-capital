@@ -25,18 +25,18 @@ export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
 
   // Rotas protegidas — exige login
-  if ((path.startsWith('/dashboard') || path.startsWith('/admin')) && !user) {
+  if ((path.startsWith('/dashboard') || path.startsWith('/admin') || path.startsWith('/plataforma')) && !user) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
-  // Admin só para o email autorizado
-  if (path.startsWith('/admin') && user?.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
+  // Admin e plataforma só para o email autorizado
+  if ((path.startsWith('/admin') || path.startsWith('/plataforma')) && user?.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
   // Se ja logado, nao mostrar a tela de login
   if (path === '/' && user) {
-    const dest = user.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL ? '/admin' : '/dashboard'
+    const dest = user.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL ? '/plataforma' : '/dashboard'
     return NextResponse.redirect(new URL(dest, request.url))
   }
 
@@ -44,5 +44,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/dashboard/:path*', '/admin/:path*']
+  matcher: ['/', '/dashboard/:path*', '/admin/:path*', '/plataforma/:path*']
 }
